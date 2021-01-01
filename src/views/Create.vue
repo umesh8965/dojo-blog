@@ -22,13 +22,19 @@ nes (95 sloc) 1.94 KB
 
 <script>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
     setup(){
         const title = ref('')
         const body = ref('')
         const tags = ref([])
-        const tag = ref('')        
+        const tag = ref('')    
+        
+        const route = useRouter()  // variable name can be anything here use 'route'
+        
+        //route.go(-1) this is for backword use of 'go'
+        //route.go(1) this is for farward use of 'go'
 
         const handleKeydown = () => {
             if(!tags.value.includes(tag.value)){
@@ -51,6 +57,7 @@ export default {
                 body: JSON.stringify(post)
             })
 
+            route.push({ name: "Home" })
         }
         
         return{ title, body, tags, tag, handleKeydown, handleSubmit }
